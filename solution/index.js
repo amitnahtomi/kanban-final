@@ -8,7 +8,7 @@ function handleAddTask (event){
     let newTaskEl = document.createElement("li");
     newTaskEl.classList.add("task");
     newTaskEl.innerText = newTask;
-    newTaskEl.setAttribute("contenteditable", false);
+    newTaskEl.contentEditable = false;
     let taskList = document.getElementsByTagName("ul")[event.target.parentNode.id];
     taskList.insertBefore(newTaskEl, taskList.childNodes[0]);
     tasks[event.target.parentNode.dataset.action].unshift(newTask);  
@@ -17,18 +17,20 @@ function handleAddTask (event){
 }
 function handleDBclick (event){
     if(event.target.tagName !== "LI") return;
-    let tempInput = document.createElement("input");
-    tempInput.classList.add("task");
-    tempInput.setAttribute("type", "text");
-    tempInput.setAttribute("value", event.target.innerHTML);
-    let tempI = tasks[event.target.closest("section").dataset.action].indexOf(tempInput.value);
-    event.target.innerText = "";
-    event.target.append(tempInput);
-    tempInput.focus();
-    tempInput.onblur = () => {
-        tasks[event.target.closest("section").dataset.action][tempI] = tempInput.value;
+    let task = event.target.innerText;
+    let targetArr = event.target.closest("section").dataset.action;
+    let taskI = tasks[targetArr].indexOf(task);
+    event.target.contentEditable = true;
+    event.target.focus();
+    event.target.onblur = () => {
+        if(event.target.innerText=="") {
+            event.target.focus();
+            return;
+        }
+        let updateTask = event.target.innerText;
+        tasks[targetArr][taskI] = updateTask;
         localStorage.setItem("tasks", JSON.stringify(tasks));
-        event.target.innerText = tempInput.value;
+        event.target.contentEditable = false
     }
     
 }
