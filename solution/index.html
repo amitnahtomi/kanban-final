@@ -11,27 +11,30 @@
 <body>
     <h1 id="page-title">tasks mannagment</h1>
     <input id="search" type="text" placeholder="search">
+    <button id="save" onclick="saveApi()">save</button>
+    <button id="load" onclick="loadApi()">load</button>
     <section id="0" data-action="todo">
-        <ul class="to-do-tasks">
+        <ul class="to-do-tasks" id="1">
 
         </ul>
-        <button id="submit-add-to-do" type="submit" >add</button>
+        <button id="submit-add-to-do" type="submit">add</button>
         <input id="add-to-do-task" type="text" placeholder="add a new task">
         
     </section>
     <section id="1" data-action="in-progress">
-        <ul class="in-progress-tasks">
+        <ul class="in-progress-tasks" id="2"> 
 
         </ul>
         <button id="submit-add-in-progress" type="submit" >add</button>
         <input id="add-in-progress-task" type="text" placeholder="add a new task">
     </section>
     <section id="2" data-action="done">
-        <ul class="done-tasks">
+        <ul class="done-tasks" id="3">
 
         </ul>
         <button id="submit-add-done" type="submit" >add</button>
         <input id="add-done-task" type="text" placeholder="add a new task">
     </section>
+    <div class="load" id="loading"></div>
 </body>
 </html>
