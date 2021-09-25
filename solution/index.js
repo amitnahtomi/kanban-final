@@ -8,6 +8,7 @@ function handleAddTask (event){
     let newTaskEl = document.createElement("li");
     newTaskEl.classList.add("task");
     newTaskEl.innerText = newTask;
+    newTaskEl.setAttribute("contenteditable", false);
     let taskList = document.getElementsByTagName("ul")[event.target.parentNode.id];
     taskList.insertBefore(newTaskEl, taskList.childNodes[0]);
     tasks[event.target.parentNode.dataset.action].unshift(newTask);  
@@ -31,20 +32,6 @@ function handleDBclick (event){
     }
     
 }
-
-function handleDBclick2 (event){
-    //let tempInput = document.createElement("input");
-    //event.target.append(tempInput);
-    //tempInput.setAttribute("type", "text");
-    //tempInput.setAttribute("value", event.target.getProperty("innerText"));
-    event.target.setProperty("innerText") = "";
-    tempInput.focus();
-    tempInput.onblur = () => {
-        event.target.innerText = tempInput.value;
-        tempInput.hidden = true;
-    }
-}
-
 function loadTasks () {
     if(!localStorage.getItem("tasks"))
     localStorage.setItem("tasks", JSON.stringify(tasks))
@@ -69,11 +56,17 @@ function handleMouseOver(event) {
 }
 function keyDownMove(e) {
     let task = document.getElementsByClassName("active")[0];
+    let prevUl = task.closest("section").dataset.action;
+    prevUlindex = tasks[prevUl].indexOf(task.innerText)
     if(e.key === "1" || e.key === "2" || e.key === "3"){
         console.log(e.altKey);
     let indexUl = e.key - 1;
     let targetUl = document.getElementsByTagName("ul")[indexUl];
-    targetUl.append(task);
+    targetUl.insertBefore(task, targetUl.childNodes[0]);
+    tasks[targetUl.parentNode.dataset.action].unshift(task.innerText);
+    tasks[prevUl].splice(prevUlindex, 1);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
     }
 }
 function mouseOutElement(event) {

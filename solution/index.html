@@ -9,11 +9,14 @@
     <title>Tasks manager</title>
 </head>
 <body>
+    <header>
     <h1 id="page-title">tasks mannagment</h1>
     <input id="search" type="text" placeholder="search">
     <button id="save" onclick="saveApi()">save</button>
     <button id="load" onclick="loadApi()">load</button>
+    </header>
     <section id="0" data-action="todo">
+        <h2>TODO</h2>
         <ul class="to-do-tasks" id="1">
 
         </ul>
@@ -22,6 +25,7 @@
         
     </section>
     <section id="1" data-action="in-progress">
+        <h2>IN PROGRESS</h2>
         <ul class="in-progress-tasks" id="2"> 
 
         </ul>
@@ -29,6 +33,7 @@
         <input id="add-in-progress-task" type="text" placeholder="add a new task">
     </section>
     <section id="2" data-action="done">
+        <h2>DONE</h2>
         <ul class="done-tasks" id="3">
 
         </ul>
