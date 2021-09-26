@@ -1,0 +1,93 @@
+.task {
+    background-color: rgb(182, 224, 182);
+    border: 3px solid white;
+    padding: 5px;
+    text-align: left;
+    margin-right: 30px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+
+#loading {
+    width: 4rem;
+    height: 4rem;
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid rgb(255, 145, 0);
+    border-radius: 100%;
+    margin: auto;
+    visibility: hidden;
+    animation: spin 1s infinite linear;
+}
+#loading.display {
+    visibility: visible;
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.active {
+    background-color: rgb(255, 255, 102);
+    border: 1px solid rgb(255, 255, 255);
+    padding: 5px;
+}
+section{
+    margin-top: 20px;
+    display: inline-table;
+    border-radius: 5px;
+    padding-bottom: 20px;
+    text-align: center;
+    margin-left: 80px;
+    background-color: rgb(227, 236, 240);
+}
+ul {
+    list-style-type: none;
+    width: 300px;
+    align-content: center;
+    
+}
+body{
+    background-color:rgb(159, 221, 240);
+}
+header {
+    text-align: center;
+}
+button:hover {
+   color:white;
+   background-color: rgb(146, 144, 144);
+}
+h2 {
+    color: rgb(8, 45, 70);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
+}
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 80px;
+    color: rgb(8, 45, 70);
+}
+img {
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+  margin-bottom: 300px;
+  border-radius: 10px;
+}
+input {
+    height: 20px;
+    margin-right: 20px;
+
+
+}
+button {
+width: 80px;
+height: 27px;
+margin-right: 10px;
+margin-left: 10px;
+}
