@@ -2,8 +2,8 @@
 function handleAddTask (event){
     let newTask = event.target.nextElementSibling.value;
     if(newTask === ""){
-    alert("can't add empty task");
-    return;
+        alert("can't add empty task");
+        return;
     }
     let newTaskEl = document.createElement("li");
     newTaskEl.classList.add("task");
@@ -36,7 +36,7 @@ function handleDBclick (event){
 }
 function loadTasks () {
     if(!localStorage.getItem("tasks"))
-    localStorage.setItem("tasks", JSON.stringify(tasks))
+        localStorage.setItem("tasks", JSON.stringify(tasks))
     tasks = JSON.parse(localStorage.getItem("tasks"));
     let classI = 0;
     let newLi;
@@ -61,16 +61,16 @@ function keyPressMove(e) {
     let prevUl = task.closest("section").dataset.action;
     prevUlindex = tasks[prevUl].indexOf(task.innerText)
     if(e.altKey && (e.key === "1" || e.key === "2" || e.key === "3")){
-    let indexUl = e.key - 1;
-    let targetUl = document.getElementsByTagName("ul")[indexUl];
-    targetUl.insertBefore(task, targetUl.childNodes[0]);
-    if(e.key === "3"){
-        document.getElementById("wellDone").style.display = "block";
-        setTimeout(function() {document.getElementById("wellDone").style.display = "none";}, 4000);
-    }
-    tasks[targetUl.parentNode.dataset.action].unshift(task.innerText);
-    tasks[prevUl].splice(prevUlindex, 1);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+        let indexUl = e.key - 1;
+        let targetUl = document.getElementsByTagName("ul")[indexUl];
+        targetUl.insertBefore(task, targetUl.childNodes[0]);
+        if(e.key === "3"){
+            document.getElementById("wellDone").style.display = "block";
+            setTimeout(function() {document.getElementById("wellDone").style.display = "none";}, 4000);
+        }
+        tasks[targetUl.parentNode.dataset.action].unshift(task.innerText);
+        tasks[prevUl].splice(prevUlindex, 1);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
 
     }
 }
@@ -89,9 +89,9 @@ function search (key) {
         query = document.getElementById("search").value.toUpperCase();
     for(let i = 0; i < liArr.length; i++){
         if(liArr[i].innerText.toLocaleUpperCase().includes(query) === false)
-        liArr[i].hidden = true;
+            liArr[i].hidden = true;
         else
-        liArr[i].hidden = false;
+            liArr[i].hidden = false;
         
     }
 }
@@ -107,7 +107,7 @@ async function saveApi() {
     document.body.appendChild(load);
     load.classList.add("loader");
     displayLoading();
-    let tempTasks = JSON.parse(localStorage.getItem("tasks"));  //
+    let tempTasks = JSON.parse(localStorage.getItem("tasks"));
     const response = await fetch("https://json-bins.herokuapp.com/bin/614b1c664021ac0e6c080cef", { 
         method: "PUT",
         headers:{
@@ -117,9 +117,8 @@ async function saveApi() {
         body: JSON.stringify({"tasks": tempTasks})
     })
     if(!response.ok){
-    alert("oh no! something went wrong");
+        alert("oh no! something went wrong");
     }
-   // hideLoading();
     load.remove();
 }
 async function loadApi() {
@@ -139,15 +138,13 @@ async function loadApi() {
             "Content-Type": "application/json"
         }});
     if(!response.ok){
-    alert("oh no! something went wrong");
-   // hideLoading();
-    load.remove();
-    return;
+        alert("oh no! something went wrong");
+        load.remove();
+        return;
     }
     let tasksI = await response.json();
     tasks = tasksI.tasks;
-    localStorage.setItem("tasks", JSON.stringify(tasks));  //
-   // hideLoading();
+    localStorage.setItem("tasks", JSON.stringify(tasks));
     load.remove();
     loadTasks();
     
@@ -157,7 +154,6 @@ let tasks = {
     "in-progress": [],
     "done": []
 }
-
 loadTasks();
 document.getElementById("submit-add-to-do").addEventListener("click", handleAddTask);
 document.getElementById("submit-add-in-progress").addEventListener("click", handleAddTask);
@@ -167,18 +163,9 @@ document.addEventListener("mouseover", handleMouseOver);
 document.getElementById("search").addEventListener("keyup", search);
 document.addEventListener("mouseout", mouseOutElement);
 
-//const loader = document.querySelector("#loading");
 function displayLoading() {
     let loader = document.querySelector("#loading");
     loader.classList.add("display");
-    //setTimeout(() => {
-      //  loader.classList.remove("loader");
-    //}, 5000);
-}
- 
-function hideLoading() {
-    let loader = document.querySelector("#loading");
-    loader.classList.remove("display");
 }
 
 
