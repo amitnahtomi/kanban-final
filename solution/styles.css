@@ -1,11 +1,9 @@
 .task {
-    /*background-color: rgb(118, 220, 252);*/
     background-color: rgb(182, 224, 182);
     border: 3px solid white;
     padding: 5px;
     text-align: left;
     margin-right: 30px;
-    /*size: 1.5em;*/
     margin-bottom: 15px;
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
@@ -42,13 +40,11 @@
 section{
     margin-top: 20px;
     display: inline-table;
-    /*border: 3px solid blue;*/
     border-radius: 5px;
     padding-bottom: 20px;
     text-align: center;
     margin-left: 80px;
     background-color: rgb(227, 236, 240);
-    /*background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPktw4qpITiIULi9Juj8rgimTVe7U54tkNfA&usqp=CAU");*/
 }
 ul {
     list-style-type: none;
@@ -57,7 +53,7 @@ ul {
     
 }
 body{
-    background-color:rgb(159, 221, 240);/* olive;*/
+    background-color:rgb(159, 221, 240);
 }
 header {
     text-align: center;
@@ -89,11 +85,9 @@ input {
 
 
 }
-
 button {
 width: 80px;
 height: 27px;
 margin-right: 10px;
 margin-left: 10px;
-
 }
