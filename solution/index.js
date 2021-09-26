@@ -43,7 +43,7 @@ function loadTasks () {
     for(let task in tasks){
         for(let i = 0; i < tasks[task].length; i++){
             newLi =  document.createElement("li");
-            newLi.classList.add("task")
+            newLi.classList.add("task");
             newLi.innerHTML = tasks[task][i];
             document.getElementsByTagName("ul")[classI].append(newLi);
         }
@@ -65,8 +65,8 @@ function keyPressMove(e) {
     let targetUl = document.getElementsByTagName("ul")[indexUl];
     targetUl.insertBefore(task, targetUl.childNodes[0]);
     if(e.key === "3"){
-        document.getElementById("wellDone").hidden = false;
-        setTimeout(function() {document.getElementById("wellDone").hidden = true;}, 4000);
+        document.getElementById("wellDone").style.display = "block";
+        setTimeout(function() {document.getElementById("wellDone").style.display = "none";}, 4000);
     }
     tasks[targetUl.parentNode.dataset.action].unshift(task.innerText);
     tasks[prevUl].splice(prevUlindex, 1);
@@ -102,11 +102,16 @@ function handleBlur (event) {
     event.target.innerHTML = tempInput.value;
 }
 async function saveApi() {
+    let load = document.createElement("div");
+    load.setAttribute("id", "loading");
+    document.body.appendChild(load);
+    load.classList.add("loader");
     displayLoading();
-    let tempTasks = localStorage.getItem("tasks");
+    let tempTasks = JSON.parse(localStorage.getItem("tasks"));  //
     const response = await fetch("https://json-bins.herokuapp.com/bin/614b1c664021ac0e6c080cef", { 
         method: "PUT",
         headers:{
+            "Accept": "application/json",
             "Content-Type": "application/json"
         },
         body: JSON.stringify({"tasks": tempTasks})
@@ -114,31 +119,43 @@ async function saveApi() {
     if(!response.ok){
     alert("oh no! something went wrong");
     }
-    hideLoading();
+   // hideLoading();
+    load.remove();
 }
 async function loadApi() {
-    console.log(localStorage.getItem("tasks"));
+    let load = document.createElement("div");
+    load.setAttribute("id", "loading");
+    document.body.appendChild(load);
+    load.classList.add("loader");
     displayLoading();
     let liArr = document.querySelectorAll("li");
     for(let i = 0; i < liArr.length; i++){
         liArr[i].remove();
     } 
-    const response = await fetch("https://json-bins.herokuapp.com/bin/614b1c664021ac0e6c080cef");
+    const response = await fetch("https://json-bins.herokuapp.com/bin/614b1c664021ac0e6c080cef",  { 
+        method: "GET",
+        headers:{
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }});
     if(!response.ok){
     alert("oh no! something went wrong");
-    hideLoading();
+   // hideLoading();
+    load.remove();
     return;
     }
     let tasksI = await response.json();
     tasks = tasksI.tasks;
-    localStorage.setItem("tasks", tasks);
+    localStorage.setItem("tasks", JSON.stringify(tasks));  //
+   // hideLoading();
+    load.remove();
     loadTasks();
-    hideLoading();
+    
 }
 let tasks = {
-    todo: [],
+    "todo": [],
     "in-progress": [],
-    done: []
+    "done": []
 }
 
 loadTasks();
@@ -150,15 +167,17 @@ document.addEventListener("mouseover", handleMouseOver);
 document.getElementById("search").addEventListener("keyup", search);
 document.addEventListener("mouseout", mouseOutElement);
 
-const loader = document.querySelector("#loading");
+//const loader = document.querySelector("#loading");
 function displayLoading() {
+    let loader = document.querySelector("#loading");
     loader.classList.add("display");
-    setTimeout(() => {
-        loader.classList.remove("display");
-    }, 5000);
+    //setTimeout(() => {
+      //  loader.classList.remove("loader");
+    //}, 5000);
 }
  
 function hideLoading() {
+    let loader = document.querySelector("#loading");
     loader.classList.remove("display");
 }
 
