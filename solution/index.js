@@ -54,17 +54,20 @@ function loadTasks () {
 function handleMouseOver(event) {
     if(event.target.tagName !== "LI") return; 
     event.target.classList.add("active");
-    document.addEventListener("keypress", keyDownMove);
+    document.addEventListener("keydown", keyPressMove);
 }
-function keyDownMove(e) {
+function keyPressMove(e) {
     let task = document.getElementsByClassName("active")[0];
     let prevUl = task.closest("section").dataset.action;
     prevUlindex = tasks[prevUl].indexOf(task.innerText)
-    if(e.key === "1" || e.key === "2" || e.key === "3"){
-        console.log(e.altKey);
+    if(e.altKey && (e.key === "1" || e.key === "2" || e.key === "3")){
     let indexUl = e.key - 1;
     let targetUl = document.getElementsByTagName("ul")[indexUl];
     targetUl.insertBefore(task, targetUl.childNodes[0]);
+    if(e.key === "3"){
+        document.getElementById("wellDone").hidden = false;
+        setTimeout(function() {document.getElementById("wellDone").hidden = true;}, 4000);
+    }
     tasks[targetUl.parentNode.dataset.action].unshift(task.innerText);
     tasks[prevUl].splice(prevUlindex, 1);
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -74,7 +77,7 @@ function keyDownMove(e) {
 function mouseOutElement(event) {
     if(event.target.tagName !== "LI") return;
     event.target.classList.remove("active");
-    document.removeEventListener("keypress", keyDownMove);
+    document.removeEventListener("keydown", keyPressMove);
 }
     
    
@@ -114,6 +117,7 @@ async function saveApi() {
     hideLoading();
 }
 async function loadApi() {
+    console.log(localStorage.getItem("tasks"));
     displayLoading();
     let liArr = document.querySelectorAll("li");
     for(let i = 0; i < liArr.length; i++){
@@ -127,7 +131,6 @@ async function loadApi() {
     }
     let tasksI = await response.json();
     tasks = tasksI.tasks;
-    console.log(tasks);
     localStorage.setItem("tasks", tasks);
     loadTasks();
     hideLoading();
@@ -137,11 +140,7 @@ let tasks = {
     "in-progress": [],
     done: []
 }
-//localStorage.setItem("tasks", JSON.stringify(itemsArray));
-//const tasks = JSON.parse(localStorage.getItem("tasks")); 
-//if(!loadTasks()){
-//localStorage.setItem("tasks", JSON.stringify(tasks));
-//}
+
 loadTasks();
 document.getElementById("submit-add-to-do").addEventListener("click", handleAddTask);
 document.getElementById("submit-add-in-progress").addEventListener("click", handleAddTask);
@@ -150,29 +149,17 @@ document.addEventListener("dblclick", handleDBclick);
 document.addEventListener("mouseover", handleMouseOver);
 document.getElementById("search").addEventListener("keyup", search);
 document.addEventListener("mouseout", mouseOutElement);
-//document.addEventListener("keydown", keyDownMove);
 
-/*let tasks = {
-    todo: [],
-    "in-progress": [],
-    done: []
-}
-if(!loadTasks()){
-localStorage.setItem("tasks", JSON.stringify(tasks));
-}*/
 const loader = document.querySelector("#loading");
 function displayLoading() {
     loader.classList.add("display");
-    // to stop loading after some time
     setTimeout(() => {
         loader.classList.remove("display");
     }, 5000);
 }
-
-// hiding loading 
+ 
 function hideLoading() {
     loader.classList.remove("display");
 }
-
 
 
