@@ -1,19 +1,23 @@
 .task {
-    background-color: aqua;
-    border: 3px solid yellow;
-    padding: 1rem;
-    text-align: center;
-    margin-right: 40px;
-    size: 1.5em;
-    margin-bottom: 30px;
-    font-size: 20px;
+    /*background-color: rgb(118, 220, 252);*/
+    background-color: rgb(182, 224, 182);
+    border: 3px solid white;
+    padding: 5px;
+    text-align: left;
+    margin-right: 30px;
+    /*size: 1.5em;*/
+    margin-bottom: 15px;
+    font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
+    
 }
+
+
 #loading {
-    width: 2rem;
-    height: 2rem;
-    border: 5px solid #f3f3f3;
-    border-top: 6px solid #9c41f2;
+    width: 4rem;
+    height: 4rem;
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid rgb(255, 145, 0);
     border-radius: 100%;
     margin: auto;
     visibility: hidden;
@@ -31,42 +35,46 @@
     }
 }
 .active {
-    background-color: yellow;
-    border: 1px solid yellow;
-    padding: 1rem;
+    background-color: rgb(255, 255, 102);
+    border: 1px solid rgb(255, 255, 255);
+    padding: 5px;
 }
 section{
     margin-top: 20px;
     display: inline-table;
-    border: 3px solid blue;
+    /*border: 3px solid blue;*/
     border-radius: 5px;
     padding-bottom: 20px;
     text-align: center;
-    margin-left: 155px;
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPktw4qpITiIULi9Juj8rgimTVe7U54tkNfA&usqp=CAU");
+    margin-left: 80px;
+    background-color: rgb(227, 236, 240);
+    /*background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPktw4qpITiIULi9Juj8rgimTVe7U54tkNfA&usqp=CAU");*/
 }
 ul {
     list-style-type: none;
-    width: 170px;
+    width: 300px;
     align-content: center;
+    
 }
 body{
-    background-color: olive;
+    background-color:rgb(159, 221, 240);/* olive;*/
 }
 header {
     text-align: center;
 }
 button:hover {
-   color:navy;
-   background-color: deeppink;
+   color:white;
+   background-color: rgb(146, 144, 144);
 }
 h2 {
-    color: goldenrod;
+    color: rgb(8, 45, 70);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
 }
 h1 {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     font-size: 80px;
-    color: magenta;
+    color: rgb(8, 45, 70);
 }
 img {
   margin-left: auto;
@@ -74,4 +82,18 @@ img {
   width: 20%;
   margin-bottom: 300px;
   border-radius: 10px;
+}
+input {
+    height: 20px;
+    margin-right: 20px;
+
+
+}
+
+button {
+width: 80px;
+height: 27px;
+margin-right: 10px;
+margin-left: 10px;
+
 }
